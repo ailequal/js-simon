@@ -9,6 +9,7 @@ $(document).ready(function () {
     } while (scanArray(arrayBot, numberBot));
     arrayBot.push(numberBot);
   }
+  console.log(arrayBot);
 
   // display an alert with 5 random numberBots
   var alertBot = '';
@@ -19,23 +20,25 @@ $(document).ready(function () {
 
   // start a timer for 30 seconds and then start the function
   // that will ask the user to insert the 5 numbers (in order??)
-  var arrayUser = [];
-  arrayUser = setTimeout(function () {
-    for (var i = 0; i < 5; i++) {
-      do {
-  
-      } while (true);
-      // aske 3 times number, if between 1 and 100 push, otherwise ask again
-      // only between 1 and 100
-      // not same number
-    }
-    return arrayUser;
+  setTimeout(function () {
+    var arrayUser = [];
+    var numberUser = 0;
+    var i = 0;
+    do {
+      numberUser = parseInt(prompt('Insert one of the numbers that were display here 30 seconds ago'));
+      if (checkMinMax(1, 100, numberUser)) {
+        arrayUser.push(numberUser);
+        i++;
+      }
+    } while (i < 5);
+    console.log(arrayUser);
+
+    // compare the inserted numbers with the arrayBot
+    console.log(arrayDiff(arrayBot, arrayUser));
+
+    // display the results (how many and which one were correct)
+
   }, 1000);
-
-  // compare the inserted numbers with the arrayBot
-
-  // display the results (how many and which one were correct)
-
 });
 
 
@@ -63,6 +66,16 @@ function scanArray(array, item) {
 function checkMinMax(min, max, number) {
   if (number >= min && number <= max) {
     return true;
+  }
+  return false;
+}
+
+// compare array that are exactly the same
+function arrayDiff(array1, array2) {
+  for (var i = 0; i < array1.length; i++) {
+    if (array1[i] !== array2[i]) {
+      return true;
+    }
   }
   return false;
 }
