@@ -37,7 +37,14 @@ $(document).ready(function () {
     console.log(arrayUser);
 
     // compare the inserted numbers with the arrayBot
-    console.log(arrayCompare(arrayBot, arrayUser));
+    var score = 0;
+    for (var i = 0; i < arrayBot.length; i++) {
+      if (scanArray(arrayBot, arrayUser[i])) {
+        score++;
+      }
+    }
+    console.log(score);
+    console.log(compareArray(arrayBot, arrayUser));
 
     // display the results (how many and which one were correct)
 
@@ -74,7 +81,7 @@ function checkMinMax(min, max, number) {
 }
 
 // check if two arrays are exactly the same
-function arrayCompare(array1, array2) {
+function compareArray(array1, array2) {
   for (var i = 0; i < array1.length; i++) {
     if (array1[i] !== array2[i]) {
       return false;
