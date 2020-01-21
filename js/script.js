@@ -3,7 +3,8 @@ $(document).ready(function () {
   // creating array that stores the numbers (without repetition)
   var arrayBot = [];
   var numberBot = 0;
-  for (var i = 0; i < 5; i++) {
+  var toRemember = 5;
+  for (var i = 0; i < toRemember; i++) {
     do {
       numberBot = getRandomNumber(1, 100);
     } while (scanArray(arrayBot, numberBot));
@@ -11,7 +12,7 @@ $(document).ready(function () {
   }
   console.log(arrayBot);
 
-  // display an alert with 5 random numberBots
+  // display an alert with toRemember random numberBots
   var alertBot = '';
   for (var i = 0; i < arrayBot.length; i++) {
     alertBot = alertBot + ' ' + arrayBot[i];
@@ -19,22 +20,24 @@ $(document).ready(function () {
   alert('Try to memorize this numbers: ' + alertBot);
 
   // start a timer for 30 seconds and then start the function
-  // that will ask the user to insert the 5 numbers (in order??)
+  // that will ask the user to insert the toRemember numbers (in order??)
+  // check that is between min and max
+  // check that there is no repettion
   setTimeout(function () {
     var arrayUser = [];
     var numberUser = 0;
     var i = 0;
     do {
       numberUser = parseInt(prompt('Insert one of the numbers that were display here 30 seconds ago'));
-      if (checkMinMax(1, 100, numberUser)) {
+      if (checkMinMax(1, 100, numberUser) && !scanArray(arrayUser, numberUser)) {
         arrayUser.push(numberUser);
         i++;
       }
-    } while (i < 5);
+    } while (i < toRemember);
     console.log(arrayUser);
 
     // compare the inserted numbers with the arrayBot
-    console.log(arrayDiff(arrayBot, arrayUser));
+    console.log(arrayCompare(arrayBot, arrayUser));
 
     // display the results (how many and which one were correct)
 
@@ -70,12 +73,12 @@ function checkMinMax(min, max, number) {
   return false;
 }
 
-// compare array that are exactly the same
-function arrayDiff(array1, array2) {
+// check if two arrays are exactly the same
+function arrayCompare(array1, array2) {
   for (var i = 0; i < array1.length; i++) {
     if (array1[i] !== array2[i]) {
-      return true;
+      return false;
     }
   }
-  return false;
+  return true;
 }
