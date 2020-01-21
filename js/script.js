@@ -1,17 +1,20 @@
+// code
 $(document).ready(function () {
   // creating array that stores the numbers (without repetition)
   var arrayNumber = [];
+  var number = 0;
   for (var i = 0; i < 5; i++) {
-    arrayNumber[i] = getRandomNumber(1, 100);
+    do {
+      number = getRandomNumber(1, 100);
+    } while (scanArray(arrayNumber, number));
+    arrayNumber.push(number);
   }
-  // console.log(arrayNumber);
 
   // display an alert with 5 random numbers
   var alertNumber = '';
   for (var i = 0; i < arrayNumber.length; i++) {
     alertNumber = alertNumber + ' ' + arrayNumber[i];
   }
-  // console.log(alertNumber);
   alert('Try to memorize this numbers: ' + alertNumber);
 
   // start a timer for 30 seconds
@@ -28,4 +31,16 @@ function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// check if an item is stored inside an array
+function scanArray(array, item) {
+  var i = 0;
+  while (i < array.length) {
+    if (array[i] === item) {
+      return true;
+    }
+    i++;
+  }
+  return false;
 }
