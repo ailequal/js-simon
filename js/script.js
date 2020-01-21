@@ -37,18 +37,19 @@ $(document).ready(function () {
     console.log(arrayUser);
 
     // compare the inserted numbers with the arrayBot
+    // display the results (how many and which one were correct)
+    var arrayGood = [];
     var score = 0;
     for (var i = 0; i < arrayBot.length; i++) {
       if (scanArray(arrayBot, arrayUser[i])) {
+        arrayGood.push(arrayUser[i]);
         score++;
       }
     }
-    console.log(score);
-    console.log(compareArray(arrayBot, arrayUser));
-
-    // display the results (how many and which one were correct)
-
-  }, 1000);
+    console.log('You remembered these numbers ' + arrayGood);
+    console.log('The final score is ' + score);
+    // console.log(compareArray(arrayBot, arrayUser));
+  }, 30000);
 });
 
 
